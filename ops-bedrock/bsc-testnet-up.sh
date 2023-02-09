@@ -33,7 +33,7 @@ L2_URL="http://localhost:9545"
 
 OP_NODE="$PWD/op-node"
 CONTRACTS_BEDROCK="$PWD/packages/contracts-bedrock"
-DEVNET="$PWD/.bsc-qa-net"
+DEVNET="$PWD/.bsc-testnet"
 
 # Helper method that waits for a given URL to be up. Can't use
 # cURL's built-in retry logic because connection reset errors
@@ -66,8 +66,8 @@ if [ ! -f "$DEVNET/done" ]; then
     cd "$OP_NODE"
     go run cmd/main.go genesis l2 \
         --l1-rpc https://data-seed-prebsc-2-s1.binance.org:8545 \
-        --deploy-config ../packages/contracts-bedrock/deploy-config/bsc-qa.json \
-        --deployment-dir ../packages/contracts-bedrock/deployments/bsc-qa \
+        --deploy-config ../packages/contracts-bedrock/deploy-config/bsc-testnet.json \
+        --deployment-dir ../packages/contracts-bedrock/deployments/bsc-testnet \
         --outfile.l2 $DEVNET/genesis-l2.json \
         --outfile.rollup $DEVNET/rollup.json
     touch "$DEVNET/done"
