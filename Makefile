@@ -65,6 +65,10 @@ bsc-qa-up:
 	@bash ./ops-bedrock/bsc-qa-up.sh
 .PHONY: bsc-qa-up
 
+bsc-testnet-up:
+	@bash ./ops-bedrock/bsc-testnet-up.sh
+.PHONY: bsc-testnet-up
+
 devnet-up-deploy:
 	PYTHONPATH=./bedrock-devnet python3 ./bedrock-devnet/main.py --monorepo-dir=.
 .PHONY: devnet-up-deploy
@@ -76,6 +80,10 @@ devnet-down:
 bsc-qa-down:
 	@(cd ./ops-bedrock && GENESIS_TIMESTAMP=$(shell date +%s) docker-compose stop)
 .PHONY: bsc-qa-down
+
+bsc-testnet-down:
+	@(cd ./ops-bedrock && GENESIS_TIMESTAMP=$(shell date +%s) docker-compose stop)
+.PHONY: bsc-testnet-down
 
 devnet-clean:
 	rm -rf ./packages/contracts-bedrock/deployments/devnetL1
