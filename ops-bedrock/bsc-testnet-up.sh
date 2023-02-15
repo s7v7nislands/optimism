@@ -74,27 +74,27 @@ if [ ! -f "$DEVNET/done" ]; then
   )
 fi
 
-# Bring up L2.
-(
-  cd ops-bedrock
-  echo "Bringing up L2..."
-  docker-compose up -d l2
-  wait_up $L2_URL
-)
+# # Bring up L2.
+# (
+#   cd ops-bedrock
+#   echo "Bringing up L2..."
+#   docker-compose up -d l2
+#   wait_up $L2_URL
+# )
 
-L2OO_ADDRESS="0x23C46f5C6F6C1721682dDacE4A80458a1e217699"
-SEQUENCER_BATCH_INBOX_ADDRESS="$(cat $DEVNET/rollup.json | jq -r '.batch_inbox_address')"
+# L2OO_ADDRESS="0x838d3b522e040a2D47456E460e0d7eE38Be6734B"
+# SEQUENCER_BATCH_INBOX_ADDRESS="$(cat $DEVNET/rollup.json | jq -r '.batch_inbox_address')"
 
-# Bring up everything else.
-(
-  cd ops-bedrock
-  echo "Bringing up devnet..."
-  L2OO_ADDRESS="$L2OO_ADDRESS" \
-      SEQUENCER_BATCH_INBOX_ADDRESS="$SEQUENCER_BATCH_INBOX_ADDRESS" \
-      docker-compose up -d op-proposer op-batcher
+# # Bring up everything else.
+# (
+#   cd ops-bedrock
+#   echo "Bringing up devnet..."
+#   L2OO_ADDRESS="$L2OO_ADDRESS" \
+#       SEQUENCER_BATCH_INBOX_ADDRESS="$SEQUENCER_BATCH_INBOX_ADDRESS" \
+#       docker-compose up -d op-proposer op-batcher
 
-  echo "Bringing up stateviz webserver..."
-  docker-compose up -d stateviz
-)
+#   echo "Bringing up stateviz webserver..."
+#   docker-compose up -d stateviz
+# )
 
-echo "Devnet ready."
+# echo "Devnet ready."

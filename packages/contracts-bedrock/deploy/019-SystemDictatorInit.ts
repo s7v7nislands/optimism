@@ -117,6 +117,8 @@ const deployFn: DeployFunction = async (hre) => {
       SystemDictatorImpl.interface.encodeFunctionData('initialize', [config])
     )
 
+    console.log("xxxxx1")
+
     // Wait for the transaction to execute properly.
     await awaitCondition(
       async () => {
@@ -130,6 +132,7 @@ const deployFn: DeployFunction = async (hre) => {
       1000
     )
 
+    console.log("xxxxx2")
     // Verify that the contract was initialized correctly.
     const dictatorConfig = await SystemDictator.config()
     for (const [outerConfigKey, outerConfigValue] of Object.entries(config)) {
@@ -159,6 +162,7 @@ const deployFn: DeployFunction = async (hre) => {
       }
     }
   }
+    console.log("xxxxx3")
 
   // Update the owner if necessary.
   if (
@@ -186,6 +190,7 @@ const deployFn: DeployFunction = async (hre) => {
       1000
     )
   }
+    console.log("xxxxx4")
 }
 
 deployFn.tags = ['SystemDictatorImpl', 'setup']
