@@ -27,7 +27,7 @@ const config: HardhatUserConfig = {
     },
     'bsc-qanet': {
       live: false,
-      url: 'http://tf-dex-qa-ec2-bsc-test-alb-1168080131.ap-northeast-1.elb.amazonaws.com:8545',
+      url: 'http://172.22.41.240:8545',
       accounts: [process.env.PRIVATE_KEY_DEPLOYER || ethers.constants.HashZero],
     },
     'bsc-testnet': {
