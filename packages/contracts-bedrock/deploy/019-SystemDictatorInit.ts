@@ -112,13 +112,12 @@ const deployFn: DeployFunction = async (hre) => {
     console.log('Upgrading the SystemDictator proxy...')
 
     // Upgrade and initialize the proxy.
-    const recipt = await SystemDictatorProxyWithSigner.upgradeToAndCall(
+    const tx = await SystemDictatorProxyWithSigner.upgradeToAndCall(
       SystemDictatorImpl.address,
       SystemDictatorImpl.interface.encodeFunctionData('initialize', [config])
     )
 
-    console.log(recipt)
-
+    console.log("tx: ", tx)
 
     console.log("xxxxx1")
     console.log("SystemDictatorImpl.address", SystemDictatorImpl.address)
@@ -134,8 +133,8 @@ const deployFn: DeployFunction = async (hre) => {
           })) === SystemDictatorImpl.address
         )
       },
-      10,
-      3
+      3000,
+      10
     )
 
     console.log("xxxxx2")

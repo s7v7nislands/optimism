@@ -84,7 +84,7 @@ echo "get L2OO_ADDRESS please!!!"
 #   wait_up $L2_URL
 # )
 
-# L2OO_ADDRESS="0x23C46f5C6F6C1721682dDacE4A80458a1e217699"
+# L2OO_ADDRESS="0x4a5a042b8D4E0d5e3fF9aE848962678333eB9900"
 # SEQUENCER_BATCH_INBOX_ADDRESS="$(cat $DEVNET/rollup.json | jq -r '.batch_inbox_address')"
 
 # # Bring up everything else.
