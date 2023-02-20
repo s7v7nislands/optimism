@@ -1,9 +1,9 @@
 {
   "l1ChainID": 714,
   "l2ChainID": 716,
-  "l2BlockTime": 2,
+  "l2BlockTime": 1,
   "maxSequencerDrift": 300,
-  "sequencerWindowSize": 15,
+  "sequencerWindowSize": 16800,
   "channelTimeout": 40,
   "p2pSequencerAddress": "0xb536dd539a1c5CD0E7BfEad8e44fED0d9Af12eA6",
   "batchInboxAddress": "0xff00000000000000000000000000000000000000",
@@ -12,7 +12,7 @@
   "l2OutputOracleStartingTimestamp": -1,
   "l2OutputOracleProposer": "0x8566a8D3d170b3C9F4fC8502c7eaa17dC9A81Bec",
   "l2OutputOracleChallenger": "0x1cfbEDe877B3DfDA8d44256601333CA85b79c282",
-  "l2GenesisBlockGasLimit": "0xE4E1C0",
+  "l2GenesisBlockGasLimit": "0x1dcd6500",
   "baseFeeVaultRecipient": "0x98EDAAD7C3cd90F50c56e5E85eC59478c3906AF9",
   "l1FeeVaultRecipient": "0x8d91B3Dbc3C5a64C9c4fcC656eAf7194C1A97D3b",
   "sequencerFeeVaultRecipient": "0xE78C60b1Ea18d32CFF7588c45F06eBbCAeA9820f",
@@ -30,6 +30,6 @@
   "governanceTokenOwner": "0x98EDAAD7C3cd90F50c56e5E85eC59478c3906AF9",
   "eip1559Denominator": 8,
   "eip1559Elasticity": 2,
-  "l1GenesisBlockTimestamp": "0x63edc9dd",
-  "l1StartingBlockTag": "0xe40552b1798befa31a84f7052c74308d2fe1971aaf7085ea5e6e4256b3f78b80"
+  "l1GenesisBlockTimestamp": "0x63f3356f",
+  "l1StartingBlockTag": "0x96f29cd54831829f440c5708611c59a7a578d4decafd257c506847c7f0dd00df"
 }
