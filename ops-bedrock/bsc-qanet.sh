@@ -92,7 +92,6 @@ echo "get L2OO_ADDRESS please!!!"
 #   cd ops-bedrock
 #   echo "Bringing up devnet..."
 #   L2OO_ADDRESS="$L2OO_ADDRESS" \
-#       SEQUENCER_BATCH_INBOX_ADDRESS="$SEQUENCER_BATCH_INBOX_ADDRESS" \
 #       docker-compose up -d op-proposer op-batcher
 
 #   echo "Bringing up stateviz webserver..."
