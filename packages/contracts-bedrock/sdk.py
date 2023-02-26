@@ -6,7 +6,7 @@ import json
 
 def main():
   pjoin = os.path.join
-  l1network = "bsc-qanet"
+  l1network = "bsc-testnet"
   deployment_dir = pjoin("packages/contracts-bedrock/deployments", l1network)
 
 

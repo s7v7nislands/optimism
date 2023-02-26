@@ -3,7 +3,7 @@
   "l2ChainID": 715,
   "l2BlockTime": 2,
   "maxSequencerDrift": 300,
-  "sequencerWindowSize": 15,
+  "sequencerWindowSize": 16800,
   "channelTimeout": 40,
   "p2pSequencerAddress": "0xb536dd539a1c5CD0E7BfEad8e44fED0d9Af12eA6",
   "batchInboxAddress": "0xff00000000000000000000000000000000000000",
@@ -30,6 +30,6 @@
   "governanceTokenOwner": "0x98EDAAD7C3cd90F50c56e5E85eC59478c3906AF9",
   "eip1559Denominator": 8,
   "eip1559Elasticity": 2,
-  "l1GenesisBlockTimestamp": "0x63ec4532",
-  "l1StartingBlockTag": "0x3d53150e53e5f154a679e83d8e881e177f952e97dab568cfbd6a347a02204ff3"
+  "l1GenesisBlockTimestamp": "0x63f736c7",
+  "l1StartingBlockTag": "0x20fbe4cfffd71e935246b29cec015a5cfadd11e1bf3eba1777a407b0714a199d"
 }
