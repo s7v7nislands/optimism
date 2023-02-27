@@ -12,7 +12,7 @@
   "l2OutputOracleStartingTimestamp": -1,
   "l2OutputOracleProposer": "0x8566a8D3d170b3C9F4fC8502c7eaa17dC9A81Bec",
   "l2OutputOracleChallenger": "0x1cfbEDe877B3DfDA8d44256601333CA85b79c282",
-  "l2GenesisBlockGasLimit": "0x1dcd6500",
+  "l2GenesisBlockGasLimit": "0x5f5e100",
   "baseFeeVaultRecipient": "0x98EDAAD7C3cd90F50c56e5E85eC59478c3906AF9",
   "l1FeeVaultRecipient": "0x8d91B3Dbc3C5a64C9c4fcC656eAf7194C1A97D3b",
   "sequencerFeeVaultRecipient": "0xE78C60b1Ea18d32CFF7588c45F06eBbCAeA9820f",
@@ -30,6 +30,6 @@
   "governanceTokenOwner": "0x98EDAAD7C3cd90F50c56e5E85eC59478c3906AF9",
   "eip1559Denominator": 8,
   "eip1559Elasticity": 2,
-  "l1GenesisBlockTimestamp": "0x63f721df",
-  "l1StartingBlockTag": "0x83d83116ce61248f7675d95dd7db2d98611dda097d0557aef2acc4744e7929ea"
+  "l1GenesisBlockTimestamp": "0x63fc766a",
+  "l1StartingBlockTag": "0x32a66f95f9e04e3eb3bc71b4b02b26ff1280ce8132aa0d58e9cd9f5bcfe6f2e3"
 }
