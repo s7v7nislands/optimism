@@ -35,6 +35,11 @@ const config: HardhatUserConfig = {
       url: 'https://data-seed-prebsc-2-s1.binance.org:8545',
       accounts: [process.env.PRIVATE_KEY_DEPLOYER || ethers.constants.HashZero],
     },
+    'bsc-localnet': {
+      live: false,
+      url: 'http://127.0.0.1:8545',
+      accounts: [process.env.PRIVATE_KEY_DEPLOYER || ethers.constants.HashZero],
+    },
     devnetL1: {
       live: false,
       url: 'http://localhost:8545',
