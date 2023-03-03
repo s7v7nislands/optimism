@@ -33,7 +33,7 @@ L2_URL="http://localhost:9545"
 
 OP_NODE="$PWD/op-node"
 CONTRACTS_BEDROCK="$PWD/packages/contracts-bedrock"
-DEVNET="$PWD/.bsc-testnet"
+DEVNET="$PWD/.bsc-localnet"
 
 # Helper method that waits for a given URL to be up. Can't use
 # cURL's built-in retry logic because connection reset errors
@@ -65,34 +65,34 @@ if [ ! -f "$DEVNET/done" ]; then
   (
     cd "$OP_NODE"
     go run cmd/main.go genesis l2 \
-        --l1-rpc https://data-seed-prebsc-2-s1.binance.org:8545 \
-        --deploy-config ../packages/contracts-bedrock/deploy-config/bsc-testnet.json \
-        --deployment-dir ../packages/contracts-bedrock/deployments/bsc-testnet \
+        --l1-rpc http://127.0.0.1:8545 \
+        --deploy-config ../packages/contracts-bedrock/deploy-config/bsc-localnet.json \
+        --deployment-dir ../packages/contracts-bedrock/deployments/bsc-localnet \
         --outfile.l2 $DEVNET/genesis-l2.json \
         --outfile.rollup $DEVNET/rollup.json
     touch "$DEVNET/done"
   )
 fi
 
-# # Bring up L2.
-# (
-#   cd ops-bedrock
-#   echo "Bringing up L2..."
-#   docker-compose up -d l2
-#   wait_up $L2_URL
-# )
+# Bring up L2.
+(
+  cd ops-bedrock
+  echo "Bringing up L2..."
+  docker-compose -f docker-compose-bsc-localnet.yml up -d l2
+  wait_up $L2_URL
+)
 
-# L2OO_ADDRESS="0x21F6FC621b396C0c9585826eCeccC3a7BBe299Da"
+L2OO_ADDRESS="0x36C8048767c487e0828A5418AC42Ba63FeefA229"
 
-# # Bring up everything else.
-# (
-#   cd ops-bedrock
-#   echo "Bringing up devnet..."
-#   L2OO_ADDRESS="$L2OO_ADDRESS" \
-#       docker-compose up -d op-proposer op-batcher
+# Bring up everything else.
+(
+  cd ops-bedrock
+  echo "Bringing up devnet..."
+  L2OO_ADDRESS="$L2OO_ADDRESS" \
+      docker-compose -f docker-compose-bsc-localnet.yml up -d op-proposer op-batcher
 
-#   echo "Bringing up stateviz webserver..."
-#   docker-compose up -d stateviz
-# )
+  echo "Bringing up stateviz webserver..."
+  docker-compose -f docker-compose-bsc-localnet.yml up -d stateviz
+)
 
-# echo "Devnet ready."
+echo "Devnet ready."

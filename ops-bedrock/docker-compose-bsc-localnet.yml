@@ -32,7 +32,7 @@ services:
       - "8060:6060"
     volumes:
       - "l2_data:/db"
-      - "${PWD}/../.bsc-testnet/genesis-l2.json:/genesis.json"
+      - "${PWD}/../.bsc-localnet/genesis-l2.json:/genesis.json"
       - "${PWD}/test-jwt-secret.txt:/config/test-jwt-secret.txt"
     entrypoint:  # pass the L2 specific flags by overriding the entry-point and adding extra arguments
       - "/bin/sh"
@@ -49,7 +49,7 @@ services:
     command: >
       op-node
       --l1.trustrpc
-      --l1=https://data-seed-prebsc-2-s1.binance.org:8545
+      --l1=http://192.168.31.26:8545
       --l2=http://l2:8551
       --l2.jwt-secret=/config/test-jwt-secret.txt
       --sequencer.enabled
@@ -78,7 +78,7 @@ services:
       - "${PWD}/p2p-sequencer-key.txt:/config/p2p-sequencer-key.txt"
       - "${PWD}/p2p-node-key.txt:/config/p2p-node-key.txt"
       - "${PWD}/test-jwt-secret.txt:/config/test-jwt-secret.txt"
-      - "${PWD}/../.bsc-testnet/rollup.json:/rollup.json"
+      - "${PWD}/../.bsc-localnet/rollup.json:/rollup.json"
       - op_log:/op_log
 
   op-proposer:
@@ -93,7 +93,7 @@ services:
       - "6062:6060"
       - "7302:7300"
     environment:
-      OP_PROPOSER_L1_ETH_RPC: https://data-seed-prebsc-2-s1.binance.org:8545
+      OP_PROPOSER_L1_ETH_RPC: http://192.168.31.26:8545
       OP_PROPOSER_ROLLUP_RPC: http://op-node:8545
       OP_PROPOSER_POLL_INTERVAL: 1s
       OP_PROPOSER_NUM_CONFIRMATIONS: 1
@@ -120,7 +120,7 @@ services:
       - "7301:7300"
       - "6545:8545"
     environment:
-      OP_BATCHER_L1_ETH_RPC: https://data-seed-prebsc-2-s1.binance.org:8545
+      OP_BATCHER_L1_ETH_RPC: http://192.168.31.26:8545
       OP_BATCHER_L2_ETH_RPC: http://l2:8545
       OP_BATCHER_ROLLUP_RPC: http://op-node:8545
       OP_BATCHER_MAX_CHANNEL_DURATION: 1
