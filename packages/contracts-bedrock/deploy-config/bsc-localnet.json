@@ -30,6 +30,6 @@
   "governanceTokenOwner": "0x98EDAAD7C3cd90F50c56e5E85eC59478c3906AF9",
   "eip1559Denominator": 8,
   "eip1559Elasticity": 2,
-  "l1GenesisBlockTimestamp": "0x6401b1f6",
-  "l1StartingBlockTag": "0xedf9c392295018389cf82438aaef1ebbc30f60a9bd0bfad1ca51d6496195bf2b"
+  "l1GenesisBlockTimestamp": "0x640edbd8",
+  "l1StartingBlockTag": "0x9004ff6b75b971a5cea6cdb131e3c5653607a00d96c673eca166e74f67a318b0"
 }
