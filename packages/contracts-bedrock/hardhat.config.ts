@@ -27,7 +27,7 @@ const config: HardhatUserConfig = {
     },
     'bsc-qanet': {
       live: false,
-      url: 'http://172.22.41.240:8545',
+      url: 'https://bsc-qa.bk.nodereal.cc/',
       accounts: [process.env.PRIVATE_KEY_DEPLOYER || ethers.constants.HashZero],
     },
     'bsc-testnet': {
