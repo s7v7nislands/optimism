@@ -23,7 +23,7 @@ const config: HardhatUserConfig = {
       live: false,
     },
     mainnet: {
-      url: process.env.RPC_URL || 'http://localhost:8545',
+      url: process.env.L1_RPC || 'http://localhost:8545',
     },
     'bsc-qanet': {
       live: false,
