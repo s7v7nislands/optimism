@@ -112,18 +112,11 @@ const deployFn: DeployFunction = async (hre) => {
     console.log('Upgrading the SystemDictator proxy...')
 
     // Upgrade and initialize the proxy.
-    const tx = await SystemDictatorProxyWithSigner.upgradeToAndCall(
+    await SystemDictatorProxyWithSigner.upgradeToAndCall(
       SystemDictatorImpl.address,
       SystemDictatorImpl.interface.encodeFunctionData('initialize', [config])
     )
 
-    console.log("tx: ", tx)
-
-    console.log("xxxxx1")
-    console.log("SystemDictatorImpl.address", SystemDictatorImpl.address)
-    console.log('callstatic', await SystemDictatorProxy.callStatic.implementation({
-      from: ethers.constants.AddressZero,
-    }))
     // Wait for the transaction to execute properly.
     await awaitCondition(
       async () => {
@@ -133,11 +126,10 @@ const deployFn: DeployFunction = async (hre) => {
           })) === SystemDictatorImpl.address
         )
       },
-      3000,
-      10
+      30000,
+      1000
     )
 
-    console.log("xxxxx2")
     // Verify that the contract was initialized correctly.
     const dictatorConfig = await SystemDictator.config()
     for (const [outerConfigKey, outerConfigValue] of Object.entries(config)) {
@@ -167,7 +159,6 @@ const deployFn: DeployFunction = async (hre) => {
       }
     }
   }
-    console.log("xxxxx3")
 
   // Update the owner if necessary.
   if (
@@ -195,7 +186,6 @@ const deployFn: DeployFunction = async (hre) => {
       1000
     )
   }
-    console.log("xxxxx4")
 }
 
 deployFn.tags = ['SystemDictatorImpl', 'setup']
