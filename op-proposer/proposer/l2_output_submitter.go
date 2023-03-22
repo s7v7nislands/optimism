@@ -355,9 +355,11 @@ func (l *L2OutputSubmitter) CreateProposalTx(ctx context.Context, output *eth.Ou
 		opts,
 		output.OutputRoot,
 		new(big.Int).SetUint64(output.BlockRef.Number),
-		output.Status.CurrentL1.Hash,
+		// output.Status.CurrentL1.Hash,
+		[32]byte{},
 		new(big.Int).SetUint64(output.Status.CurrentL1.Number))
 	if err != nil {
+		l.log.Error("xxxxx", "hash", output.Status.CurrentL1.Hash, "number", output.Status.CurrentL1.Number)
 		l.log.Error("failed to create the ProposeL2Output transaction", "err", err)
 		return nil, err
 	}

@@ -61,6 +61,18 @@ devnet-up:
 	@bash ./ops-bedrock/devnet-up.sh
 .PHONY: devnet-up
 
+bsc-qa-up:
+	@bash ./ops-bedrock/bsc-qa-up.sh
+.PHONY: bsc-qa-up
+
+bsc-testnet-up:
+	@bash ./ops-bedrock/bsc-testnet-up.sh
+.PHONY: bsc-testnet-up
+
+bsc-localnet-up:
+	@bash ./ops-bedrock/bsc-localnet-up.sh
+.PHONY: bsc-localnet-up
+
 devnet-up-deploy:
 	PYTHONPATH=./bedrock-devnet python3 ./bedrock-devnet/main.py --monorepo-dir=.
 .PHONY: devnet-up-deploy
@@ -69,6 +81,18 @@ devnet-down:
 	@(cd ./ops-bedrock && GENESIS_TIMESTAMP=$(shell date +%s) docker-compose stop)
 .PHONY: devnet-down
 
+bsc-qa-down:
+	@(cd ./ops-bedrock && GENESIS_TIMESTAMP=$(shell date +%s) docker-compose stop)
+.PHONY: bsc-qa-down
+
+bsc-testnet-down:
+	@(cd ./ops-bedrock && GENESIS_TIMESTAMP=$(shell date +%s) docker-compose stop)
+.PHONY: bsc-testnet-down
+
+bsc-localnet-down:
+	@(cd ./ops-bedrock && GENESIS_TIMESTAMP=$(shell date +%s) docker-compose -f docker-compose-bsc-localnet.yml stop)
+.PHONY: bsc-localnet-down
+
 devnet-clean:
 	rm -rf ./packages/contracts-bedrock/deployments/devnetL1
 	rm -rf ./.devnet
@@ -76,6 +100,22 @@ devnet-clean:
 	docker image ls 'ops-bedrock*' --format='{{.Repository}}' | xargs -r docker rmi
 	docker volume ls --filter name=ops-bedrock --format='{{.Name}}' | xargs -r docker volume rm
 .PHONY: devnet-clean
+
+bsc-qa-clean:
+	# rm -rf ./packages/contracts-bedrock/deployments/devnetL1
+	# rm -rf ./.devnet
+	cd ./ops-bedrock && docker-compose down
+	# docker image ls 'ops-bedrock*' --format='{{.Repository}}' | xargs -r docker rmi
+	# docker volume ls --filter name=ops-bedrock --format='{{.Name}}' | xargs -r docker volume rm
+.PHONY: bsc-qa-clean
+
+bsc-localnet-clean:
+	rm -rf ./packages/contracts-bedrock/deployments/bsc-localnet
+	rm -rf ./.bsc-localnet
+	cd ./ops-bedrock && docker-compose -f docker-compose-bsc-localnet.yml down
+	docker image ls 'ops-bedrock*' --format='{{.Repository}}' | xargs -r docker rmi
+	docker volume ls --filter name=ops-bedrock --format='{{.Name}}' | xargs -r docker volume rm
+.PHONY: bsc-localnet-clean
 
 devnet-logs:
 	@(cd ./ops-bedrock && docker-compose logs -f)

@@ -229,6 +229,12 @@ func (s *Driver) eventLoop() {
 
 		select {
 		case <-sequencerCh:
+			if s.driverConfig.SequencerMaxSafeLag > 0 && s.derivation.SafeL2Head().Number+s.driverConfig.SequencerMaxSafeLag <= s.derivation.UnsafeL2Head().Number {
+				s.log.Warn("Delay creating new block since safe lag exceeds limit", "safe.Number", s.derivation.SafeL2Head().Number, "unsafe.Number", s.derivation.UnsafeL2Head().Number)
+				planSequencerAction()
+				continue
+			}
+
 			payload, err := s.sequencer.RunNextSequencerAction(ctx)
 			if err != nil {
 				s.log.Error("Sequencer critical error", "err", err)
