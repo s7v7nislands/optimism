@@ -48,7 +48,11 @@ func WatchHeadChanges(ctx context.Context, src NewHeadSource, fn HeadSignalFn) (
 
 type L1BlockRefsSource interface {
 	L1BlockRefByLabel(ctx context.Context, label BlockLabel) (L1BlockRef, error)
+	L1BlockRefByNumber(ctx context.Context, num uint64) (L1BlockRef, error)
 }
+
+// only used for testing
+var FinalizedBlockNumberForBSC uint64 = 15
 
 // PollBlockChanges opens a polling loop to fetch the L1 block reference with the given label,
 // on provided interval and with request timeout. Results are returned with provided callback fn,
@@ -72,7 +76,20 @@ func PollBlockChanges(ctx context.Context, log log.Logger, src L1BlockRefsSource
 				if err != nil {
 					log.Warn("failed to poll L1 block", "label", label, "err", err)
 				} else {
-					fn(ctx, ref)
+					reqCtx, reqCancel := context.WithTimeout(ctx, timeout)
+					number := ref.Number
+					if number < FinalizedBlockNumberForBSC {
+						number = 0
+					} else {
+						number -= FinalizedBlockNumberForBSC
+					}
+					ref, err := src.L1BlockRefByNumber(reqCtx, number)
+					reqCancel()
+					if err != nil {
+						log.Warn("failed to poll L1 block", "number", number, "err", err)
+					} else {
+						fn(ctx, ref)
+					}
 				}
 			case <-ctx.Done():
 				return ctx.Err()

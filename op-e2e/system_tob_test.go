@@ -13,6 +13,7 @@ import (
 	"github.com/ethereum-optimism/optimism/op-bindings/bindings"
 	"github.com/ethereum-optimism/optimism/op-bindings/predeploys"
 	"github.com/ethereum-optimism/optimism/op-e2e/e2eutils"
+	"github.com/ethereum-optimism/optimism/op-node/eth"
 	"github.com/ethereum-optimism/optimism/op-node/rollup/derive"
 	"github.com/ethereum-optimism/optimism/op-node/testutils/fuzzerutils"
 	"github.com/ethereum-optimism/optimism/op-node/withdrawals"
@@ -425,6 +426,9 @@ func TestMixedWithdrawalValidity(t *testing.T) {
 	for i := 0; i <= 8; i++ {
 		i := i // avoid loop var capture
 		t.Run(fmt.Sprintf("withdrawal test#%d", i+1), func(t *testing.T) {
+			// hack: change the finalized block number to 0 so we can withdraw
+			eth.FinalizedBlockNumberForBSC = 0
+
 			// Create our system configuration, funding all accounts we created for L1/L2, and start it
 			cfg := DefaultSystemConfig(t)
 			cfg.DeployConfig.FinalizationPeriodSeconds = 6
