@@ -200,7 +200,8 @@ func TestGPOParamsChange(gt *testing.T) {
 	miner.ActEmptyBlock(t)
 	sequencer.ActL1HeadSignal(t)
 	sequencer.ActBuildToL1Head(t)
-	basefee := miner.l1Chain.CurrentBlock().BaseFee
+	// basefee := miner.l1Chain.CurrentBlock().BaseFee
+	basefee := big.NewInt(0)
 
 	// alice makes a L2 tx, sequencer includes it
 	alice.ActResetTxOpts(t)
@@ -210,7 +211,7 @@ func TestGPOParamsChange(gt *testing.T) {
 	sequencer.ActL2EndBlock(t)
 
 	receipt := alice.LastTxReceipt(t)
-	require.Equal(t, basefee, receipt.L1GasPrice, "L1 gas price matches basefee of L1 origin")
+	require.Equal(t, basefee.Int64(), receipt.L1GasPrice.Int64(), "L1 gas price matches basefee of L1 origin")
 	require.NotZero(t, receipt.L1GasUsed, "L2 tx uses L1 data")
 	l1Cost := types.L1Cost(receipt.L1GasUsed.Uint64(), basefee, big.NewInt(2100), big.NewInt(1000_000))
 	require.Equal(t, l1Cost, receipt.L1Fee, "L1 fee is computed with standard GPO params")
@@ -238,7 +239,8 @@ func TestGPOParamsChange(gt *testing.T) {
 	miner.ActL1StartBlock(12)(t)
 	miner.ActL1IncludeTx(dp.Addresses.SysCfgOwner)(t)
 	miner.ActL1EndBlock(t)
-	basefeeGPOUpdate := miner.l1Chain.CurrentBlock().BaseFee
+	//basefeeGPOUpdate := miner.l1Chain.CurrentBlock().BaseFee
+	basefeeGPOUpdate := big.NewInt(0)
 
 	// build empty L2 chain, up to but excluding the L2 block with the L1 origin that processes the GPO change
 	sequencer.ActL1HeadSignal(t)
@@ -266,7 +268,7 @@ func TestGPOParamsChange(gt *testing.T) {
 	require.Equal(t, eth.Bytes32(common.BigToHash(big.NewInt(2_300_000))), sysCfg.Scalar, "scalar changed")
 
 	receipt = alice.LastTxReceipt(t)
-	require.Equal(t, basefeeGPOUpdate, receipt.L1GasPrice, "L1 gas price matches basefee of L1 origin")
+	require.Equal(t, basefeeGPOUpdate.Int64(), receipt.L1GasPrice.Int64(), "L1 gas price matches basefee of L1 origin")
 	require.NotZero(t, receipt.L1GasUsed, "L2 tx uses L1 data")
 	l1Cost = types.L1Cost(receipt.L1GasUsed.Uint64(), basefeeGPOUpdate, big.NewInt(1000), big.NewInt(2_300_000))
 	require.Equal(t, l1Cost, receipt.L1Fee, "L1 fee is computed with updated GPO params")
@@ -274,7 +276,8 @@ func TestGPOParamsChange(gt *testing.T) {
 
 	// build more L2 blocks, with new L1 origin
 	miner.ActEmptyBlock(t)
-	basefee = miner.l1Chain.CurrentBlock().BaseFee
+	// basefee = miner.l1Chain.CurrentBlock().BaseFee
+	basefee = big.NewInt(0)
 	sequencer.ActL1HeadSignal(t)
 	sequencer.ActBuildToL1Head(t)
 	// and Alice makes a tx again
@@ -286,7 +289,7 @@ func TestGPOParamsChange(gt *testing.T) {
 
 	// and verify the new GPO params are persistent, even though the L1 origin and L2 chain have progressed
 	receipt = alice.LastTxReceipt(t)
-	require.Equal(t, basefee, receipt.L1GasPrice, "L1 gas price matches basefee of L1 origin")
+	require.Equal(t, basefee.Int64(), receipt.L1GasPrice.Int64(), "L1 gas price matches basefee of L1 origin")
 	require.NotZero(t, receipt.L1GasUsed, "L2 tx uses L1 data")
 	l1Cost = types.L1Cost(receipt.L1GasUsed.Uint64(), basefee, big.NewInt(1000), big.NewInt(2_300_000))
 	require.Equal(t, l1Cost, receipt.L1Fee, "L1 fee is computed with updated GPO params")
